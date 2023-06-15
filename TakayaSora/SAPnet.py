@@ -2,6 +2,7 @@ import sqlite3
 import numpy as np
 import pandas as pd
 
+
 def SQL_SetUp(database_path):
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
@@ -24,13 +25,21 @@ def SQL_SetUp(database_path):
             description TEXT
         )
     ''')
-
-    data = [
+    
+    """
         ("直進", 333.44, 1.12, 0),#１番の知識
         ("左寄りの直進", 345.97, 1.03, 0),#２番の知識
         ("右寄りの直進", 0, 1, 0),#１番の知識
         ("右寄りの直進", 14.04, 1.03, 0),#１番の知識
         ("直進", 26.56, 1.12, 0)#１番の知識
+    """
+
+    data = [
+        ("直進", 18.44, 1.12, 0),#１番の知識
+        ("左寄りの直進", 25.97, 1.03, 0),#２番の知識
+        ("右寄りの直進", 45, 1, 0),#１番の知識
+        ("右寄りの直進", 59.04, 1.03, 0),#１番の知識
+        ("直進", 71.56, 1.12, 0)#１番の知識
     ]
 
     # データを挿入
@@ -112,7 +121,7 @@ def SAP_net(df,new_angle,new_distance):
                     continue
                 activity_value_temp = activation_table_div10.loc[activation_table_div10.columns[i], activation_table_div10.columns[j]]
                 input_df2.loc[input_df2['id_description'] == activation_table_div10.columns[i], 'activation'] += activity_value_temp
-
+            input_df2['activation'] = input_df2['activation'] - 0.01
     return input_df2
 
 def selection(input_df2):
@@ -121,3 +130,16 @@ def selection(input_df2):
     max_records = input_df2[input_df2['activation'] == max_description]
     select_knowledge = max_records['id_description'][0]
     return select_knowledge
+
+def dataframe_fix(data):
+    # 一番最後の列を削除
+    data = data.iloc[:, :-1]
+    # 一番最後の行を削除
+    data = data.iloc[:-1, :]
+    
+    return data
+
+def apply_forgetting(data):
+    data['activation'] = 1- data['activation']
+    return data
+
