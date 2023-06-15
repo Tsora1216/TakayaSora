@@ -1,7 +1,3 @@
-import sqlite3
-import numpy as np
-import pandas as pd
-
 
 def SQL_SetUp(database_path):
     conn = sqlite3.connect(database_path)
@@ -140,6 +136,6 @@ def dataframe_fix(data):
     return data
 
 def apply_forgetting(data):
-    data['activation'] = 1- data['activation']
+    data['activation'] =  data['activation']-0.5
     return data
 
