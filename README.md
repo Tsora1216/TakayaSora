@@ -4,8 +4,8 @@ Package名：TakayaSora
 使用項目B：EDFファイル用のパッケージ
 
 ## インストール
-```python
-pip install https://github.com/Tsora1216/TakayaSora.git
+```bat
+pip install git+https://github.com/Tsora1216/TakayaSora
 ```
 
 # SAP-Net Package
