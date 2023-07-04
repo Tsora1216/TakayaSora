@@ -1,8 +1,0 @@
-README.md
-setup.py
-TakayaSora/SAPnet.py
-TakayaSora/__init__.py
-TakayaSora.egg-info/PKG-INFO
-TakayaSora.egg-info/SOURCES.txt
-TakayaSora.egg-info/dependency_links.txt
-TakayaSora.egg-info/top_level.txt

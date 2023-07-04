@@ -142,11 +142,3 @@ def apply_forgetting(data):
     data['activation'] =  data['activation']-0.5
     return data
 
-def edf2csv(edf_filepath):
-    import os
-    csv_filepath = os.path.splitext(edf_filepath)[0]+".csv"
-
-    import mne
-    edf = mne.io.read_raw_edf(edf_filepath)
-    header = ','.join(edf.ch_names)
-    np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
