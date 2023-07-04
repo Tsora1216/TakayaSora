@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import mne
 import os
+from tqdm import tqdm
 
 
 def SQL_SetUp(database_path):
@@ -152,13 +153,20 @@ def edf4csv(edf_filepath):
     np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
 
 def edf4csv_folder(edf_folderpath):
+
+    print("Get all EDF files...{}".format(edf_folderpath))
     edf_files = []
     for root, dirs, files in os.walk(edf_folderpath):
         for file in files:
             if file.endswith(".edf"):
                 edf_files.append(os.path.join(root, file))
+
+    num=0
+    print("Got all EDF files...{}files".format(len(edf_files)))
     for file_path in edf_files:
         csv_filepath = os.path.splitext(file_path)[0] + ".csv"
         edf = mne.io.read_raw_edf(file_path)
         header = ','.join(edf.ch_names)
         np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
+        for i in tqdm(range(len(edf_files))):
+            num += 1
