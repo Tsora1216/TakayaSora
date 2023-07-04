@@ -161,12 +161,9 @@ def edf4csv_folder(edf_folderpath):
             if file.endswith(".edf"):
                 edf_files.append(os.path.join(root, file))
 
-    num=0
     print("Got all EDF files...{}files".format(len(edf_files)))
-    for file_path in edf_files:
+    for file_path in tqdm(edf_files):
         csv_filepath = os.path.splitext(file_path)[0] + ".csv"
         edf = mne.io.read_raw_edf(file_path)
         header = ','.join(edf.ch_names)
         np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
-        for i in tqdm(range(len(edf_files))):
-            num += 1
