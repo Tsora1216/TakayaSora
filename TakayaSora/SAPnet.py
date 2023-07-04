@@ -1,6 +1,9 @@
 import sqlite3
 import numpy as np
 import pandas as pd
+import mne
+import os
+
 
 def SQL_SetUp(database_path):
     conn = sqlite3.connect(database_path)
@@ -142,3 +145,20 @@ def apply_forgetting(data):
     data['activation'] =  data['activation']-0.5
     return data
 
+def edf4csv(edf_filepath):
+    csv_filepath = os.path.splitext(edf_filepath)[0] + ".csv"
+    edf = mne.io.read_raw_edf(edf_filepath)
+    header = ','.join(edf.ch_names)
+    np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
+
+def edf4csv_folder(edf_folderpath):
+    edf_files = []
+    for root, dirs, files in os.walk(edf_folderpath):
+        for file in files:
+            if file.endswith(".edf"):
+                edf_files.append(os.path.join(root, file))
+    for file_path in edf_files:
+        csv_filepath = os.path.splitext(file_path)[0] + ".csv"
+        edf = mne.io.read_raw_edf(file_path)
+        header = ','.join(edf.ch_names)
+        np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
