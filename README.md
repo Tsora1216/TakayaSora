@@ -1,4 +1,6 @@
 # TakayaSora
+## インストール方法
+git clone https://github.com/Tsora1216/TakayaSora.git
 
 使用できる関数は下記のとおりです。
 
@@ -20,3 +22,5 @@ SAP_df = SAP_net(df,angle,distance)
 select_knowledge = selection(SAP_df)
 print(SAP_df)
 print(select_knowledge)
+
+##　edfファイルをcsvファイルに変換する
