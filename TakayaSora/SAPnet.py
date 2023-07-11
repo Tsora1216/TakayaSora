@@ -155,8 +155,9 @@ def edf4csv_folder(edf_folderpath):
     edf_files = []
     for root, dirs, files in os.walk(edf_folderpath):
         for file in files:
-            if file.endswith(".edf"):
+            if file.endswith(".edf") and "PSG" in file:
                 edf_files.append(os.path.join(root, file))
+    print(edf_files)
     for file_path in edf_files:
         csv_filepath = os.path.splitext(file_path)[0] + ".csv"
         edf = mne.io.read_raw_edf(file_path)
