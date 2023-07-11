@@ -1,7 +1,7 @@
 # 概要
-Package名：TakayaSora
-使用項目A：SAP-Net用のパッケージ
-使用項目B：EDFファイル用のパッケージ
+Package名：TakayaSora<br>
+使用項目A：SAP-Net用のパッケージ<br>
+使用項目B：EDFファイル用のパッケージ<br>
 
 ## インストール
 ```bat
