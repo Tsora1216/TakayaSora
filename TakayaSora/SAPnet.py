@@ -159,6 +159,6 @@ def edf4csv_folder(edf_folderpath):
                 edf_files.append(os.path.join(root, file))
     for file_path in edf_files:
         csv_filepath = os.path.splitext(file_path)[0] + ".csv"
-        edf = mne.io.read_raw_edf(file_path)
+        edf = mne.io.read_raw_edf(file_path, picks='all')  # チャンネルをすべて読み込む
         header = ','.join(edf.ch_names)
         np.savetxt(csv_filepath, edf.get_data().T, delimiter=',', header=header)
